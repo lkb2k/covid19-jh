@@ -5,6 +5,7 @@ class Country {
         this.raw = [json];
     }
     combine(json) {
+        console.log('combine')
         this.raw.push(json);
     }
 }
@@ -13,13 +14,17 @@ export default class Dataset {
     constructor() {
         this.countries = new Map();
     }
+
+    country(country) {
+        return this.countries.get(country);
+    }
+
     push(data) {
         let row = new Country(data);
-        console.log(row.country);
         if(this.countries.has(row.country)) {
-            this.countries[row.country].combine(row)
+            this.countries.get(row.country).combine(row)
         }else{
-            this.countries[row.country] = row
+            this.countries.set(row.country, row);
         }
     }
 }

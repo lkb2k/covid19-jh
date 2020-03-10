@@ -12,5 +12,5 @@ fetch(url).then(res => {
   .on('data', row => {
     data.push(row);
   })
-  .on('end', () => console.log(data.countries));
+  .on('end', () => console.log(data.country('US')));
 });
