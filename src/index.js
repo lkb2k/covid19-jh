@@ -11,7 +11,7 @@ function country(name, cb) {
     .on('data', row => {
       data.push(row);
     })
-    .on('end', () => cb(data.country('Italy')));
+    .on('end', () => cb(data.country(name)));
   });
 }
 

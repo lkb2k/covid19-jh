@@ -4,7 +4,7 @@ var isDate = function(date) {
 
 class Country {
     constructor(json) {
-        this.country = json['Country/Region'];
+        this.country = json['Country/Region'].toLowerCase();
         this.dates = this.extractDates(json);
     }
     extractDates(row) {
@@ -35,7 +35,7 @@ export default class Dataset {
     }
 
     country(country) {
-        return this.countries.get(country);
+        return this.countries.get(country.toLowerCase());
     }
 
     push(data) {
