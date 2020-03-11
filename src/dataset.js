@@ -1,12 +1,31 @@
+var isDate = function(date) {
+    return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+}
+
 class Country {
     constructor(json) {
         this.country = json['Country/Region'];
-        this.state = json['Province/State']
-        this.raw = [json];
+        this.dates = this.extractDates(json);
     }
+    extractDates(row) {
+        return Object.keys(row).filter(key => {
+            return isDate(key);
+        }).map(key => { 
+            return {"day":key, "count":row[key]}; 
+        });
+    } 
     combine(json) {
-        console.log('combine')
-        this.raw.push(json);
+        let days = this.extractDates(json);
+        days.forEach(a => {
+            let day = this.dates.find(b => a.day === b.day)
+            day.count += a.count;
+        });
+    }    
+    chart() {
+        let fortnight = this.dates.slice(this.dates.length - 14);
+        let points = fortnight.map(d => d.count);
+        let dates = fortnight.map(d => d.day.substr(0, d.day.lastIndexOf('/')));
+        return `https://image-charts.com/chart?chtt=${this.country}&chbh=a&chd=a:${points.join()}&chl=${points.join("|")}&chxl=0:|${dates.join("|")}|&chxt=x&chs=999x250&cht=bvg`
     }
 }
 
