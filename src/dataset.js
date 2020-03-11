@@ -11,14 +11,13 @@ class Country {
         return Object.keys(row).filter(key => {
             return isDate(key);
         }).map(key => { 
-            return {"day":key, "count":row[key]}; 
+            return {"day":key, "count":parseInt(row[key])}; 
         });
     } 
-    combine(json) {
-        let days = this.extractDates(json);
-        days.forEach(a => {
+    combine(country) {        
+        country.dates.forEach(a => {
             let day = this.dates.find(b => a.day === b.day)
-            day.count += a.count;
+            day.count += parseInt(a.count);
         });
     }    
     chart() {

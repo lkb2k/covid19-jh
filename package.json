@@ -4,8 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src -d lib",
-    "test": "node --experimental-modules src/index.js"
+    "build": "babel src -d lib"
   },
   "author": "",
   "license": "ISC",
