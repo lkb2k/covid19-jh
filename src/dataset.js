@@ -25,7 +25,7 @@ class Country {
         });
     }    
     chart() {
-        let fortnight = this.dates.slice(this.dates.length - 14);
+        let fortnight = this.dates.slice(this.dates.length -21);
         let points = fortnight.map(d => d.count);
         let dates = fortnight.map(d => d.day.substr(0, d.day.lastIndexOf('/')));
         return `https://image-charts.com/chart?chtt=${this.country}&chbh=a&chd=a:${points.join()}&chl=${points.join("|")}&chxl=0:|${dates.join("|")}|&chxt=x&chs=999x250&cht=bvg`
