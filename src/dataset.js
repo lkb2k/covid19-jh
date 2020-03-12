@@ -2,6 +2,10 @@ var isDate = function(date) {
     return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
 }
 
+var extractNumber = function(str) {
+    return !str || isNaN(str) ? 0 : parseInt(str);
+}
+
 class Country {
     constructor(json) {
         this.country = json['Country/Region'].toLowerCase();
@@ -11,13 +15,13 @@ class Country {
         return Object.keys(row).filter(key => {
             return isDate(key);
         }).map(key => { 
-            return {"day":key, "count":parseInt(row[key])}; 
+            return {"day":key, "count":extractNumber(row[key])}; 
         });
     } 
     combine(country) {        
         country.dates.forEach(a => {
             let day = this.dates.find(b => a.day === b.day)
-            day.count += parseInt(a.count);
+            day.count += extractNumber(a.count);
         });
     }    
     chart() {

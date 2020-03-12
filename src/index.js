@@ -4,14 +4,16 @@ import Dataset from './dataset.js'
 
 let url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv';
 
-function country(name, cb) {
+function country(countries, cb) {
   var data = new Dataset();
   fetch(url).then(res => {
     res.body.pipe(csv())
     .on('data', row => {
       data.push(row);
     })
-    .on('end', () => cb(data.country(name)));
+    .on('end', () => {
+      cb(countries.map((name) => data.country(name)));
+    })    
   });
 }
 
