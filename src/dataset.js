@@ -8,7 +8,7 @@ var extractNumber = function(str) {
 
 class Country {
     constructor(json) {
-        this.country = json['Country/Region'].toLowerCase();
+        this.country = json['Country/Region']
         this.dates = this.extractDates(json);
     }
     extractDates(row) {
@@ -43,10 +43,11 @@ export default class Dataset {
 
     push(data) {
         let row = new Country(data);
-        if(this.countries.has(row.country)) {
-            this.countries.get(row.country).combine(row)
+        let key = row.country.toLowerCase()
+        if(this.countries.has(key)) {
+            this.countries.get(key).combine(row)
         }else{
-            this.countries.set(row.country, row);
+            this.countries.set(key, row);
         }
     }
 }
