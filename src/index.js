@@ -12,7 +12,9 @@ function country(countries, cb) {
       data.push(row);
     })
     .on('end', () => {
-      cb(countries.map((name) => data.country(name)));
+      let results = countries.map((name) => data.country(name));
+      console.log(results);
+      cb(results);
     })    
   });
 }
