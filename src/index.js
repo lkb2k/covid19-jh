@@ -12,8 +12,7 @@ function country(countries, cb) {
       data.push(row);
     })
     .on('end', () => {
-      let results = countries.map((name) => data.country(name));
-      console.log(results);
+      let results = countries.map(name => data.country(name)).filter(d => d !== undefined);
       cb(results);
     })    
   });
